@@ -1,0 +1,210 @@
+#gla-fab {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 10000;
+  background: #1a73e8;
+  color: #fff;
+  border: none;
+  border-radius: 28px;
+  padding: 12px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  transition: background 0.2s, transform 0.15s;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+#gla-fab:hover {
+  background: #1557b0;
+  transform: translateY(-2px);
+}
+
+#gla-panel {
+  position: fixed;
+  inset: 0;
+  z-index: 10001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.5);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.gla-panel-inner {
+  background: #fff;
+  border-radius: 12px;
+  width: 640px;
+  max-width: 92vw;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  overflow: hidden;
+}
+
+.gla-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid #e0e0e0;
+  flex-shrink: 0;
+}
+
+.gla-header h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #202124;
+}
+
+.gla-close {
+  background: none;
+  border: none;
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+  color: #5f6368;
+  padding: 0 4px;
+}
+
+.gla-close:hover {
+  color: #202124;
+}
+
+.gla-content {
+  padding: 20px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.gla-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 40px 0;
+  color: #5f6368;
+  font-size: 14px;
+}
+
+.gla-spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid #e0e0e0;
+  border-top-color: #1a73e8;
+  border-radius: 50%;
+  animation: gla-spin 0.8s linear infinite;
+}
+
+@keyframes gla-spin {
+  to { transform: rotate(360deg); }
+}
+
+.gla-error {
+  background: #fce8e6;
+  color: #c5221f;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.gla-lap-controls {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.gla-lap-controls button {
+  background: #f1f3f4;
+  border: 1px solid #dadce0;
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-size: 13px;
+  cursor: pointer;
+  color: #202124;
+  transition: background 0.15s;
+}
+
+.gla-lap-controls button:hover {
+  background: #e8eaed;
+}
+
+.gla-lap-list {
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid #dadce0;
+  border-radius: 8px;
+  padding: 4px 0;
+}
+
+.gla-lap-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px;
+  cursor: pointer;
+  font-size: 13px;
+  color: #202124;
+  transition: background 0.1s;
+}
+
+.gla-lap-item:hover {
+  background: #f8f9fa;
+}
+
+.gla-lap-checkbox {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  accent-color: #1a73e8;
+}
+
+.gla-lap-label {
+  flex: 1;
+}
+
+.gla-output {
+  margin-top: 20px;
+}
+
+.gla-output h3 {
+  margin: 0 0 10px 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: #202124;
+}
+
+#gla-stats-text {
+  background: #f8f9fa;
+  border: 1px solid #dadce0;
+  border-radius: 8px;
+  padding: 14px;
+  font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+  font-size: 12px;
+  line-height: 1.5;
+  white-space: pre;
+  overflow-x: auto;
+  color: #202124;
+  margin: 0;
+}
+
+.gla-copy-btn {
+  display: inline-block;
+  margin-top: 10px;
+  background: #1a73e8;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 20px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.gla-copy-btn:hover {
+  background: #1557b0;
+}
