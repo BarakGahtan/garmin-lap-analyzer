@@ -212,18 +212,28 @@
       }
 
       // HR from raw records
-      const hrValues = lapRecords.map((r) => r.heart_rate).filter((hr) => hr != null && hr > 0);
+      const hrRecords = lapRecords.filter((r) => r.heart_rate != null && r.heart_rate > 0);
+      const hrValues = hrRecords.map((r) => r.heart_rate);
 
-      let minHR, maxHR, avgHR;
+      let minHR, maxHR, avgHR, timeToMinHR;
       if (hrValues.length > 0) {
         minHR = Math.min(...hrValues);
         maxHR = Math.max(...hrValues);
         avgHR = Math.round(hrValues.reduce((s, v) => s + v, 0) / hrValues.length);
+
+        // Find first record where HR equals minHR, compute seconds from lap start
+        const minHRRecord = hrRecords.find((r) => r.heart_rate === minHR);
+        if (minHRRecord != null && minHRRecord.timestamp != null && lap.start_time != null) {
+          timeToMinHR = Math.round(minHRRecord.timestamp - lap.start_time);
+        } else {
+          timeToMinHR = null;
+        }
       } else {
         // Fallback to lap summary (min HR unavailable from summary)
         minHR = null;
         maxHR = lap.max_heart_rate || null;
         avgHR = lap.avg_heart_rate || null;
+        timeToMinHR = null;
       }
 
       // Distance from lap summary
@@ -249,6 +259,7 @@
         minHR,
         maxHR,
         avgHR,
+        timeToMinHR,
         elapsedTime,
       };
     });
@@ -269,8 +280,8 @@
   function generateStatsText(stats) {
     if (stats.length === 0) return 'No laps selected.';
 
-    const header = 'Lap  | Distance  | Avg Pace  | Min HR | Max HR | Avg HR';
-    const sep = '-----|-----------|-----------|--------|--------|-------';
+    const header = 'Lap  | Distance  | Avg Pace  | Min HR | Max HR | Avg HR | Min HR @';
+    const sep = '-----|-----------|-----------|--------|--------|--------|----------';
 
     const rows = stats.map((s) => {
       const lap = s.lapNumber.toString().padStart(3);
@@ -279,7 +290,8 @@
       const mi = (s.minHR != null ? String(s.minHR) : '--').padStart(6);
       const mx = (s.maxHR != null ? String(s.maxHR) : '--').padStart(6);
       const av = (s.avgHR != null ? String(s.avgHR) : '--').padStart(6);
-      return ` ${lap} | ${dist} | ${pace} | ${mi} | ${mx} | ${av}`;
+      const at = (s.timeToMinHR != null ? formatPace(s.timeToMinHR) : '--:--').padStart(8);
+      return ` ${lap} | ${dist} | ${pace} | ${mi} | ${mx} | ${av} | ${at}`;
     });
 
     return [header, sep, ...rows].join('\n');

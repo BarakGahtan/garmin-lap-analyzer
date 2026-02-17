@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Garmin Lap Analyzer",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Analyze lap data from Garmin Connect activities using raw FIT file data",
   "content_scripts": [
     {
